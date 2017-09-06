@@ -1,33 +1,69 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Check the profitability of saving money!"),
   
-  # Sidebar with a slider input for number of bins 
+  # Sidebar
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
+      h3("Variables influencing the time to reach your goal"),
+      
+      # Input for salary
+      h4("Salary [yearly]"),
+      h5("what you earn through hard work"),
+      numericInput("sal","How many $ do you earn?",
+                   value=1000, min=0, max=1000000, step=0.5),
+      
+      # Input for expenses
+      h4("Expenses [yearly]"),
+      h5("what you spend for living"),
+      numericInput("exp","How many $ do you use?",
+                   value=999, min=0, max=1000000, step=0.5),
+      
+      # Slider for year increase
+      h4("% gain [yearly]"),
+      h5("expected increase of your portfolio"),
+        sliderInput("perc", "expected gain/loss",
+                    -100, 100, 0),
+      
+      # Input for years
+      h4("Years"),
+      h5("period of time you are willing to wait"),
+      numericInput("year","For how long will you save/invest money?",
+                   value=2, min=2, max=100, step=1),
+      
+      # Display lines
+      h4("Display lines"),
+      h5("Select what you want to see displayed in the plot"),
+      checkboxInput("showearn","Salaries",value=FALSE),
+      checkboxInput("showexpe","Expenses",value=FALSE),
+      checkboxInput("showsave","Savings",value=FALSE),
+      checkboxInput("showport","Portfolio",value=FALSE)
     ),
     
-    # Show a plot of the generated distribution
+    # Main Panel
     mainPanel(
-       plotOutput("distPlot")
+      h4("Total amount of money you earned"),
+      h5("... hard-worker ..."),
+      textOutput("earn"),
+      
+      h4("Total amount of money you spent"),
+      h5("Life has its cost"),
+      textOutput("expe"),
+
+      h4("Total amount of money you saved"),
+      h5("To avoid betting pais off"),
+      textOutput("save"),
+
+      h4("Total amount of money you will get"),
+      h5("Impressive right?"),
+      textOutput("port"),
+      
+      h4("The $ over the years"),
+      plotOutput("plot")
     )
   )
 ))
