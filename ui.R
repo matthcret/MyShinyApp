@@ -46,23 +46,22 @@ shinyUI(fluidPage(
     
     # Main Panel
     mainPanel(
-      h4("Total amount of money you earned"),
+      h4("Total amount of $ you earned"),
       h5("... hard-worker ..."),
       textOutput("earn"),
       
-      h4("Total amount of money you spent"),
+      h4("Total amount of $ you spent"),
       h5("Life has its cost"),
       textOutput("expe"),
 
-      h4("Total amount of money you saved"),
+      h4("Total amount of $ you saved"),
       h5("To avoid betting pais off"),
       textOutput("save"),
 
-      h4("Total amount of money you will get"),
+      h4("Total amount of $ you will get"),
       h5("Impressive right?"),
       textOutput("port"),
       
-      h4("The $ over the years"),
       plotOutput("plot")
     )
   )

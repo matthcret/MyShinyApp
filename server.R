@@ -20,6 +20,9 @@ shinyServer(function(input, output) {
       total$port[i] <- (total$port[i-1] + input$sal - input$exp) * (1 + input$perc/100)
     }
     
+    total$max <- max(c(total$earn[input$year],total$expe[input$year],
+                       total$save[input$year],total$port[input$year]))
+    
   })
   
   output$earn = renderText({total$earn[input$year]})
@@ -31,7 +34,7 @@ shinyServer(function(input, output) {
     
     plot(total$earn, total$year, xlab = "Year", ylab = "$",
          xlim = c(1,total$year[input$year]),
-         ylim = c(0,total$earn[input$year]+20))
+         ylim = c(0,total$max+20))
     
     # salaries line
     if(input$showearn){
